@@ -1,54 +1,61 @@
-# Astro Starter Kit: Basics
+# 🎨 Interactive Component Playground
 
-```sh
-npm create astro@latest -- --template basics
+A modern, interactive playground for exploring and experimenting with UI components, animations, and 3D scenes. Built with Astro and React.
+
+## ✨ Features
+
+- **Live Preview**: Instantly see your changes in action
+- **Interactive Controls**: Tweak parameters in real-time with the built-in UI controls
+- **Dark/Light Mode**: Seamless theme switching for comfortable viewing
+- **Component Categories**:
+  - 🎭 Animations (particles, waves, bouncing elements)
+  - 🎲 3D Scenes (powered by Babylon.js)
+  - 🎯 UI Components (buttons, cards, inputs)
+  - 📊 Interactive Visualizations
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🛠 Structure
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/    # Core UI components
+├── samples/       # Interactive examples
+├── lib/          # Shared utilities and tools
+│   └── tweaker/  # Interactive control panel
+├── hooks/        # React hooks
+└── utils/        # Helper functions
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🎮 Using the Tweaker
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Each sample can be customized using the Tweaker panel:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- Adjust numerical values with sliders
+- Toggle animations on/off
+- Modify colors and styles
+- Transform 3D objects
+- Customize particle systems
 
-## 🧞 Commands
+## 🤝 Contributing
 
-All commands are run from the root of the project, from a terminal:
+Feel free to experiment, create new samples, or improve existing ones. Each sample lives in its own file under `src/samples/` and follows a simple pattern:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```typescript
+export const MySample: SampleFunction = () => {
+  // Create your interactive component here
+  return element;
+};
+```
 
-## 👀 Want to learn more?
+## 📝 License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT
