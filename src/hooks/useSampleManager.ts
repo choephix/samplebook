@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { toTitleCase } from '../utils/toTitleCase';
-import type { Sample } from '../types/sample';
+import { toTitleCase } from "../utils/toTitleCase";
+import type { Sample } from "../types/sample";
 
 export function useSampleManager() {
   const [samples, setSamples] = useState<Sample[]>([]);
@@ -13,23 +13,23 @@ export function useSampleManager() {
   }, []);
 
   async function loadSamples() {
-    const modules = import.meta.glob('/src/samples/**/*.sample.ts');
+    const modules = import.meta.glob("/src/samples/**/*.sample.ts");
     const loadedSamples: Sample[] = [];
 
     for (const path in modules) {
       const module = await modules[path]();
-      const group = path.split('/').pop()?.replace('.sample.ts', '') || 'misc';
+      const group = path.split("/").pop()?.replace(".sample.ts", "") || "misc";
       const groupDisplayName = toTitleCase(group);
-      
-      Object.entries(module).forEach(([exportName, fn]) => {
-        if (typeof fn === 'function') {
+
+      Object.entries(module as any).forEach(([exportName, fn]) => {
+        if (typeof fn === "function") {
           const sampleDisplayName = toTitleCase(exportName);
           loadedSamples.push({
             meta: {
               title: sampleDisplayName,
-              group: groupDisplayName
+              group: groupDisplayName,
             },
-            fn: fn as () => HTMLElement | string
+            fn: fn as () => HTMLElement | string,
           });
         }
       });
@@ -49,6 +49,6 @@ export function useSampleManager() {
   return {
     samples,
     activeSample,
-    setActiveSample
+    setActiveSample,
   };
 }
