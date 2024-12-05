@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+
+import { toTitleCase } from '../utils/toTitleCase';
 import type { Sample } from '../types/sample';
 
 export function useSampleManager() {
@@ -17,13 +19,15 @@ export function useSampleManager() {
     for (const path in modules) {
       const module = await modules[path]();
       const group = path.split('/').pop()?.replace('.sample.ts', '') || 'misc';
+      const groupDisplayName = toTitleCase(group);
       
       Object.entries(module).forEach(([exportName, fn]) => {
         if (typeof fn === 'function') {
+          const sampleDisplayName = toTitleCase(exportName);
           loadedSamples.push({
             meta: {
-              title: exportName,
-              group
+              title: sampleDisplayName,
+              group: groupDisplayName
             },
             fn: fn as () => HTMLElement | string
           });
