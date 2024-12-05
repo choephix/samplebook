@@ -1,61 +1,88 @@
-# 🎨 Interactive Component Playground
+# Component Preview
 
-A modern, interactive playground for exploring and experimenting with UI components, animations, and 3D scenes. Built with Astro and React.
+A lightweight, fast alternative to Storybook for previewing and testing UI components. Built with Astro and React.
 
-## ✨ Features
+## Why?
 
-- **Live Preview**: Instantly see your changes in action
-- **Interactive Controls**: Tweak parameters in real-time with the built-in UI controls
-- **Dark/Light Mode**: Seamless theme switching for comfortable viewing
-- **Component Categories**:
-  - 🎭 Animations (particles, waves, bouncing elements)
-  - 🎲 3D Scenes (powered by Babylon.js)
-  - 🎯 UI Components (buttons, cards, inputs)
-  - 📊 Interactive Visualizations
+- **Lightweight**: No complex configuration, just create a `.sample.ts` file and export your component
+- **Fast**: Instant hot-reloading, minimal build time
+- **Interactive**: Built-in parameter controls without writing any boilerplate
+- **Modern**: Dark/light mode, responsive design, and a clean interface
 
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
-# Install dependencies
 npm install
-
-# Start the development server
 npm run dev
 ```
 
-## 🛠 Structure
+## Usage
+
+1. Create a `.sample.ts` file in `src/samples/`:
+
+```typescript
+export const MyButton = () => {
+  const button = document.createElement('button');
+  button.textContent = 'Click me';
+  
+  const tweaker = createTweakerUI()
+    .addStringInput({
+      label: 'Text',
+      get: () => button.textContent || '',
+      set: value => button.textContent = value
+    });
+
+  return [button, tweaker.dom];
+};
+```
+
+2. That's it! Your component appears in the sidebar automatically.
+
+## Features
+
+### Interactive Controls
+
+The built-in Tweaker UI lets you:
+- Add sliders, inputs, and buttons
+- Control numerical values
+- Adjust colors and styles
+- Transform properties
+- Toggle states
+
+No configuration or extra code required - just use the Tweaker API.
+
+### Theme Support
+
+- Automatic dark/light mode
+- Smooth transitions
+- Consistent styling across components
+- System preference detection
+
+### Developer Experience
+
+- Hot module reloading
+- Automatic file watching
+- Simple file-based routing
+- Zero configuration
+
+## Project Structure
 
 ```
 src/
 ├── components/    # Core UI components
-├── samples/       # Interactive examples
-├── lib/          # Shared utilities and tools
-│   └── tweaker/  # Interactive control panel
-├── hooks/        # React hooks
+├── samples/      # Your component samples
+├── lib/          # Utilities and tools
 └── utils/        # Helper functions
 ```
 
-## 🎮 Using the Tweaker
+## Example Components
 
-Each sample can be customized using the Tweaker panel:
+The project includes various sample components demonstrating different use cases:
+- Basic UI elements (buttons, inputs, cards)
+- Interactive animations
+- 3D scenes (via Babylon.js)
+- Data visualizations
 
-- Adjust numerical values with sliders
-- Toggle animations on/off
-- Modify colors and styles
-- Transform 3D objects
-- Customize particle systems
-
-## 🤝 Contributing
-
-Feel free to experiment, create new samples, or improve existing ones. Each sample lives in its own file under `src/samples/` and follows a simple pattern:
-
-```typescript
-export const MySample: SampleFunction = () => {
-  // Create your interactive component here
-  return element;
-};
-```
-
-## 📝 License
+## License
 
 MIT
