@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { App } from '../components/App';
+---
+
+<Layout title="Component Samples">
+  <div id="root">
+    <App client:load />
+  </div>
+</Layout>
+
+<style>
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+</style>
