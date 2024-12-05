@@ -1,4 +1,4 @@
-import { getTweakerStyles } from './styles/TweakerStyles';
+import { getTweakerStyles } from '@/lib/tweaker/styles/TweakerStyles';
 import type { 
   TweakerControl, 
   ButtonConfig, 
@@ -8,7 +8,7 @@ import type {
   DropdownConfig,
   VectorInputConfig,
   TweakerLabel 
-} from './types';
+} from '@/lib/tweaker/types';
 
 export class TweakerUI {
   private container: HTMLElement;

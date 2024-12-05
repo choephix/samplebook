@@ -1,4 +1,4 @@
-import type { Sample } from '../types/sample';
+import type { Sample } from '@/types/sample';
 
 export function groupSamplesByCategory(samples: Sample[]): Record<string, Sample[]> {
   return samples.reduce((acc, sample) => {

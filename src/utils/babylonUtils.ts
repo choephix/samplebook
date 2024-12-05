@@ -58,7 +58,7 @@ export function createBabylonScene(options: SceneOptions = {}) {
     engine.resize();
   });
 
-  resizeObserver.observe(canvas);
+  resizeObserver.observe(canvas as any);
 
   // Start rendering loop
   engine.runRenderLoop(() => {

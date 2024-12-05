@@ -1,4 +1,4 @@
-import type { Sample } from '../types/sample';
+import type { Sample } from "@/types/sample";
 
 export class SampleManager {
   private samples: Sample[] = [];
@@ -30,7 +30,7 @@ export class SampleManager {
     this.samples = [];
     for (const path in modules) {
       const module = await modules[path]();
-      Object.entries(module).forEach(([exportName, fn]) => {
+      Object.entries(module as any).forEach(([exportName, fn]) => {
         if (typeof fn === 'function') {
           this.samples.push({
             meta: {

@@ -1,8 +1,8 @@
-import React from 'react';
-import type { Sample } from '../types/sample';
-import { groupSamplesByCategory } from '../utils/sampleUtils';
-import { SidebarStyles } from './styles/SidebarStyles';
-import { ThemeToggle } from './ThemeToggle';
+import { groupSamplesByCategory } from '@/utils/sampleUtils';
+import { SidebarStyles } from '@/components/styles/SidebarStyles';
+import { ThemeToggle } from '@/components/ThemeToggle';
+
+import type { Sample } from '@/types/sample';
 
 interface SidebarProps {
   samples: Sample[];

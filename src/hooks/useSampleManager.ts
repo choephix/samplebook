@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { toTitleCase } from "../utils/toTitleCase";
-import type { Sample } from "../types/sample";
+import { toTitleCase } from "@/utils/toTitleCase";
+import type { Sample } from "@/types/sample";
 
 export function useSampleManager() {
   const [samples, setSamples] = useState<Sample[]>([]);

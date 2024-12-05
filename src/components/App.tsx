@@ -1,8 +1,8 @@
 import React from 'react';
-import { Sidebar } from './Sidebar';
-import { Preview } from './Preview';
-import { useSampleManager } from '../hooks/useSampleManager';
-import { ThemeProvider } from '../contexts/ThemeContext';
+import { Sidebar } from '@/components/Sidebar';
+import { Preview } from '@/components/Preview';
+import { useSampleManager } from '@/hooks/useSampleManager';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 export function App() {
   const { samples, activeSample, setActiveSample } = useSampleManager();
