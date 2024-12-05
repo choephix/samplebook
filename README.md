@@ -1,87 +1,77 @@
 # Component Preview
 
-A lightweight, fast alternative to Storybook for previewing and testing UI components. Built with Astro and React.
+A minimal, fast alternative to Storybook for testing components in your monorepo.
 
 ## Why?
 
-- **Lightweight**: No complex configuration, just create a `.sample.ts` file and export your component
-- **Fast**: Instant hot-reloading, minimal build time
-- **Interactive**: Built-in parameter controls without writing any boilerplate
-- **Modern**: Dark/light mode, responsive design, and a clean interface
+- **Zero Config**: Add as a workspace, write `.sample.ts` files, done
+- **Fast**: Instant hot-reloading, no build step
+- **Simple**: Test components from other workspaces without ceremony
+- **Practical**: Built-in parameter controls that just work
 
-## Getting Started
+## Usage
+
+1. Add to your monorepo:
+
+```json
+{
+  "workspaces": [
+    "packages/*",
+    "preview"
+  ]
+}
+```
+
+2. Install your workspace dependencies:
+
+```json
+{
+  "dependencies": {
+    "@your-org/components": "workspace:*"
+  }
+}
+```
+
+3. Create a `.sample.ts` file:
+
+```typescript
+import { Button } from '@your-org/components';
+
+export const Primary = () => {
+  const button = Button({ variant: 'primary' });
+  
+  const tweaker = createTweakerUI()
+    .addDropdown({
+      label: 'Variant',
+      options: ['primary', 'secondary'],
+      get: () => button.variant,
+      set: value => button.setVariant(value)
+    });
+
+  return [button.element, tweaker.dom];
+};
+```
+
+## Tweaker API
+
+Control your components with zero boilerplate:
+
+```typescript
+createTweakerUI()
+  .addButton({ label: 'Click', trigger: fn })
+  .addStringInput({ label: 'Text', get: fn, set: fn })
+  .addNumericInput({ label: 'Width', get: fn, set: fn })
+  .addRangeInput({ label: 'Opacity', get: fn, set: fn })
+  .addDropdown({ label: 'Size', options: [], get: fn, set: fn })
+  .addVectorInput({ label: 'Position', get: fn, set: fn })
+```
+
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
-
-## Usage
-
-1. Create a `.sample.ts` file in `src/samples/`:
-
-```typescript
-export const MyButton = () => {
-  const button = document.createElement('button');
-  button.textContent = 'Click me';
-  
-  const tweaker = createTweakerUI()
-    .addStringInput({
-      label: 'Text',
-      get: () => button.textContent || '',
-      set: value => button.textContent = value
-    });
-
-  return [button, tweaker.dom];
-};
-```
-
-2. That's it! Your component appears in the sidebar automatically.
-
-## Features
-
-### Interactive Controls
-
-The built-in Tweaker UI lets you:
-- Add sliders, inputs, and buttons
-- Control numerical values
-- Adjust colors and styles
-- Transform properties
-- Toggle states
-
-No configuration or extra code required - just use the Tweaker API.
-
-### Theme Support
-
-- Automatic dark/light mode
-- Smooth transitions
-- Consistent styling across components
-- System preference detection
-
-### Developer Experience
-
-- Hot module reloading
-- Automatic file watching
-- Simple file-based routing
-- Zero configuration
-
-## Project Structure
-
-```
-src/
-├── components/    # Core UI components
-├── samples/      # Your component samples
-├── lib/          # Utilities and tools
-└── utils/        # Helper functions
-```
-
-## Example Components
-
-The project includes various sample components demonstrating different use cases:
-- Basic UI elements (buttons, inputs, cards)
-- Interactive animations
-- 3D scenes (via Babylon.js)
-- Data visualizations
 
 ## License
 
