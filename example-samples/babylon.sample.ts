@@ -1,7 +1,7 @@
 import { Vector3, MeshBuilder, StandardMaterial, Color3, Mesh } from '@babylonjs/core';
-import { createBabylonScene } from '../utils/babylonUtils';
-import { createTweakerUI } from '../lib/tweaker/TweakerUI';
-import type { SampleFunction } from '../types/sample';
+import { createBabylonScene } from '../src/utils/babylonUtils';
+import { createTweakerUI } from '../src/lib/tweaker/TweakerUI';
+import type { SampleFunction } from '../src/types/sample';
 
 export const SpinningCube: SampleFunction = () => {
   const { canvas, scene } = createBabylonScene({ withGrid: true, withOrbitalCamera: true });

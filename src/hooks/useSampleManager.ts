@@ -13,7 +13,7 @@ export function useSampleManager() {
   }, []);
 
   async function loadSamples() {
-    const modules = import.meta.glob("/src/samples/**/*.sample.ts");
+    const modules = import.meta.glob("/example-samples/**/*.sample.ts");
     const loadedSamples: Sample[] = [];
 
     for (const path in modules) {

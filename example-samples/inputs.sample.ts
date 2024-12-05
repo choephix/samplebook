@@ -1,4 +1,4 @@
-import type { SampleFunction } from '../types/sample';
+import type { SampleFunction } from '../src/types/sample';
 
 export const CustomCheckbox: SampleFunction = () => {
   const container = document.createElement('label');

@@ -1,5 +1,5 @@
-import type { SampleFunction } from '../types/sample';
-import { createTweakerUI } from '../lib/tweaker/TweakerUI';
+import type { SampleFunction } from '../src/types/sample';
+import { createTweakerUI } from '../src/lib/tweaker/TweakerUI';
 
 export const BouncingBall: SampleFunction = () => {
   const container = document.createElement('div');
