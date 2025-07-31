@@ -60,17 +60,11 @@ function SampleCard({
 
   return (
     <div className="sample-preview">
-      <div className="sample-header">
-        <h3 className="sample-title">{sample.name}</h3>
-        <p className="sample-file">{sample.file}</p>
-      </div>
-      <div className="sample-content">
-        {error ? (
-          <div className="error-message">Error rendering sample: {error}</div>
-        ) : (
-          <div id={`sample-${sample.name}`} />
-        )}
-      </div>
+      {error ? (
+        <div className="error-message">Error rendering sample: {error}</div>
+      ) : (
+        <div id={`sample-${sample.name}`} />
+      )}
     </div>
   );
 }
@@ -84,6 +78,16 @@ function Sidebar({
   selectedSample: Sample | null;
   onSampleSelect: (sample: Sample) => void;
 }) {
+  // Group samples by file path
+  const groupedSamples = samples.reduce((groups, sample) => {
+    const filePath = sample.file;
+    if (!groups[filePath]) {
+      groups[filePath] = [];
+    }
+    groups[filePath].push(sample);
+    return groups;
+  }, {} as Record<string, Sample[]>);
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -91,15 +95,24 @@ function Sidebar({
         <span className="sample-count">{samples.length} total</span>
       </div>
       <div className="sample-list">
-        {samples.map((sample) => (
-          <button
-            key={sample.name}
-            className={`sample-item ${selectedSample?.name === sample.name ? 'active' : ''}`}
-            onClick={() => onSampleSelect(sample)}
-          >
-            <div className="sample-item-name">{sample.name}</div>
-            <div className="sample-item-file">{sample.file}</div>
-          </button>
+        {Object.entries(groupedSamples).map(([filePath, fileSamples]) => (
+          <div key={filePath} className="sample-group">
+            <div className="sample-group-header">
+              <span className="sample-group-title">{filePath}</span>
+              <span className="sample-group-count">{fileSamples.length}</span>
+            </div>
+            <div className="sample-group-items">
+              {fileSamples.map((sample) => (
+                <button
+                  key={sample.name}
+                  className={`sample-item ${selectedSample?.name === sample.name ? 'active' : ''}`}
+                  onClick={() => onSampleSelect(sample)}
+                >
+                  <div className="sample-item-name">{sample.name}</div>
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
@@ -182,7 +195,16 @@ export function App() {
   return (
     <div className="app">
       <div className="header">
-        <h1>Samplebook</h1>
+        <div className="header-content">
+          <h1>Samplebook</h1>
+          {selectedSample && (
+            <div className="header-sample-info">
+              <span className="header-separator">›</span>
+              <span className="header-sample-name">{selectedSample.name}</span>
+              <span className="header-sample-file">{selectedSample.file}</span>
+            </div>
+          )}
+        </div>
         <p style={{ margin: "0.5rem 0 0 0", opacity: 0.9 }}>
           Found {samples.length} sample{samples.length !== 1 ? "s" : ""}
         </p>
