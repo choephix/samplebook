@@ -88,13 +88,24 @@ function Sidebar({
     return groups;
   }, {} as Record<string, Sample[]>);
 
+  // Function to prettify file path
+  const prettifyFilePath = (filePath: string) => {
+    return filePath
+      .replace(/\.samples\.ts$/, '') // Remove .samples.ts extension
+      .replace(/\.sample\.ts$/, '') // Remove .sample.ts extension
+      .replace(/\.ts$/, '') // Remove .ts extension
+      .replace(/\.js$/, '') // Remove .js extension
+      .replace(/\.samples\.js$/, '') // Remove .samples.js extension
+      .replace(/\.sample\.js$/, ''); // Remove .sample.js extension
+  };
+
   return (
     <div className="sidebar">
       <div className="sample-list">
         {Object.entries(groupedSamples).map(([filePath, fileSamples]) => (
           <div key={filePath} className="sample-group">
             <div className="sample-group-header">
-              <span className="sample-group-title">{filePath}</span>
+              <span className="sample-group-title">{prettifyFilePath(filePath)}</span>
             </div>
             <div className="sample-group-items">
               {fileSamples.map((sample) => (
@@ -190,17 +201,18 @@ export function App() {
   return (
     <div className="app">
       <div className="header">
-        <div className="header-content">
+        <div className="header-left">
           <h1>Samplebook</h1>
+        </div>
+        <div className="header-right">
           {selectedSample && (
             <div className="header-sample-info">
+              <span className="header-file-path">{selectedSample.file}</span>
               <span className="header-separator">›</span>
               <span className="header-sample-name">{selectedSample.name}</span>
-              <span className="header-sample-file">{selectedSample.file}</span>
             </div>
           )}
         </div>
-
       </div>
       <div className="main-content">
         <Sidebar
