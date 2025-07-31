@@ -91,15 +91,12 @@ function Sidebar({
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <h2>Samples</h2>
-        <span className="sample-count">{samples.length} total</span>
       </div>
       <div className="sample-list">
         {Object.entries(groupedSamples).map(([filePath, fileSamples]) => (
           <div key={filePath} className="sample-group">
             <div className="sample-group-header">
               <span className="sample-group-title">{filePath}</span>
-              <span className="sample-group-count">{fileSamples.length}</span>
             </div>
             <div className="sample-group-items">
               {fileSamples.map((sample) => (
@@ -205,9 +202,7 @@ export function App() {
             </div>
           )}
         </div>
-        <p style={{ margin: "0.5rem 0 0 0", opacity: 0.9 }}>
-          Found {samples.length} sample{samples.length !== 1 ? "s" : ""}
-        </p>
+
       </div>
       <div className="main-content">
         <Sidebar
