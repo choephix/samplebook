@@ -12,9 +12,13 @@ export const Router = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const navigate = (to: string) => {
+    console.log("🚀 navigate", to);
+    
     window.history.pushState(null, "", to);
     setPath(to);
   };
+
+  console.log("🔄 Router render - current path:", path);
 
   return (
     <RouterCtx.Provider value={{ path, navigate }}>
@@ -31,21 +35,25 @@ export const useRouter = () => {
 
 export const Route = ({ path, element }: { path: string; element: ReactNode }) => {
   const { path: current } = useRouter();
+  console.log("🔍 Route check:", { routePath: path, currentPath: current, matches: current === path });
   return current === path ? element : null;
 };
 
 // Helper function to parse sample route
 export const useSampleRoute = () => {
   const { path } = useRouter();
+  console.log("📍 useSampleRoute path:", path);
 
-  // Parse route like /example.samples/cubeScene
-  const match = path.match(/^\/([^\/]+)\/([^\/]+)$/);
+  // Parse route like /samples/example.samples/cubeScene or /example.samples/cubeScene
+  const match = path.match(/^\/(?:samples\/)?([^\/]+)\/([^\/]+)$/);
 
   if (match) {
     const [, filePath, functionName] = match;
+    console.log("📍 Parsed route:", { filePath, functionName });
     return { filePath, functionName, isValid: true };
   }
 
+  console.log("📍 No route match found");
   return { filePath: null, functionName: null, isValid: false };
 };
 
@@ -55,7 +63,7 @@ export const buildSampleRoute = (filePath: string, functionName: string) => {
   const filePathWithoutExt = filePath
     .replace(/\.(ts|js|tsx|jsx)$/, '') // Strip extension
     .replace(/\.samples?$/, ''); // Strip .samples or .sample
-  return `/${filePathWithoutExt}/${functionName}`;
+  return `/samples/${filePathWithoutExt}/${functionName}`;
 };
 
 export const Link = ({ to, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; children: ReactNode }) => {

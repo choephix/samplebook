@@ -1,5 +1,5 @@
 {
-  "name": "samplebook",
+  "name": "samplebook-root",
   "version": "1.0.0",
   "description": "A minimal Storybook clone for framework-agnostic component development",
   "private": true,
