@@ -31,9 +31,16 @@ const createCard = (color: string, labelText: string, content: HTMLElement): HTM
   card.style.borderRadius = '8px';
   card.style.padding = '16px';
   card.style.position = 'relative';
-  
+
   // Append "60" to the original color for semi-transparent background
   card.style.backgroundColor = `${color}20`;
+  
+  // card.style.position = 'absolute';
+  // card.style.top = '0';
+  // card.style.left = '0';
+  // card.style.right = '0';
+  // card.style.bottom = '0';
+  // card.style.margin = '20px';
   
   card.appendChild(createLabel(color, labelText));
   card.appendChild(content);
@@ -43,6 +50,17 @@ const createCard = (color: string, labelText: string, content: HTMLElement): HTM
 
 export default function processFunction(func: () => unknown): HTMLElement {
   const container = document.createElement('div');
+  container.id = 'sample-function-container';
+  container.style.position = 'relative';
+  //// center the innards of the container vertically and horizontally
+  container.style.display = 'flex';
+  container.style.justifyContent = 'center';
+  container.style.alignItems = 'center';
+  container.style.height = '100%';
+  container.style.width = '100%';
+  container.style.boxSizing = 'border-box';
+  container.style.padding = '20px';
+  container.style.gap = '16px';
   
   try {
     const result = func();

@@ -63,7 +63,7 @@ function SampleCard({
       {error ? (
         <div className="error-message">Error rendering sample: {error}</div>
       ) : (
-        <div id={`sample-${sample.name}`} />
+        <div className="sample-preview-container" id={`sample-${sample.name}`} />
       )}
     </div>
   );
