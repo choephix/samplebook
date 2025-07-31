@@ -1,0 +1,17 @@
+{
+  "name": "example-project",
+  "version": "1.0.0",
+  "description": "Example host project for Samplebook",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.170.0",
+    "typescript": "^5.7.2"
+  }
+}
