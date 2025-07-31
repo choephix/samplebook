@@ -90,8 +90,6 @@ function Sidebar({
 
   return (
     <div className="sidebar">
-      <div className="sidebar-header">
-      </div>
       <div className="sample-list">
         {Object.entries(groupedSamples).map(([filePath, fileSamples]) => (
           <div key={filePath} className="sample-group">
