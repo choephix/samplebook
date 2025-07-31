@@ -59,7 +59,7 @@ function SampleCard({
   }, [element, sample.name]);
 
   return (
-    <div className="sample-card">
+    <div className="sample-preview">
       <div className="sample-header">
         <h3 className="sample-title">{sample.name}</h3>
         <p className="sample-file">{sample.file}</p>
@@ -75,13 +75,44 @@ function SampleCard({
   );
 }
 
+function Sidebar({
+  samples,
+  selectedSample,
+  onSampleSelect,
+}: {
+  samples: Sample[];
+  selectedSample: Sample | null;
+  onSampleSelect: (sample: Sample) => void;
+}) {
+  return (
+    <div className="sidebar">
+      <div className="sidebar-header">
+        <h2>Samples</h2>
+        <span className="sample-count">{samples.length} total</span>
+      </div>
+      <div className="sample-list">
+        {samples.map((sample) => (
+          <button
+            key={sample.name}
+            className={`sample-item ${selectedSample?.name === sample.name ? 'active' : ''}`}
+            onClick={() => onSampleSelect(sample)}
+          >
+            <div className="sample-item-name">{sample.name}</div>
+            <div className="sample-item-file">{sample.file}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function LayoutError(props: { message: string }) {
   return (
-    <div>
+    <div className="app">
       <div className="header">
         <h1>Samplebook</h1>
       </div>
-      <div className="container">
+      <div className="main-content">
         <div className="error-message">
           <strong>Error loading samples:</strong> {props.message}
         </div>
@@ -92,11 +123,11 @@ function LayoutError(props: { message: string }) {
 
 function LayoutNoSamples() {
   return (
-    <div>
+    <div className="app">
       <div className="header">
         <h1>Samplebook</h1>
       </div>
-      <div className="container">
+      <div className="main-content">
         <div className="no-samples">
           <h2>No samples found</h2>
           <p>
@@ -129,6 +160,15 @@ export function App() {
   console.log("Sample functions:", sampleFunctions);
   console.log("Error message:", errorMessage);
 
+  const [selectedSample, setSelectedSample] = useState<Sample | null>(null);
+
+  // Set the first sample as selected when samples load
+  useEffect(() => {
+    if (samples && samples.length > 0 && !selectedSample) {
+      setSelectedSample(samples[0]);
+    }
+  }, [samples, selectedSample]);
+
   if (errorMessage) {
     return <LayoutError message={errorMessage} />;
   }
@@ -137,42 +177,46 @@ export function App() {
     return <LayoutNoSamples />;
   }
 
+  const selectedSampleFunction = selectedSample ? sampleFunctions[selectedSample.name] : null;
+
   return (
-    <div>
+    <div className="app">
       <div className="header">
         <h1>Samplebook</h1>
         <p style={{ margin: "0.5rem 0 0 0", opacity: 0.9 }}>
           Found {samples.length} sample{samples.length !== 1 ? "s" : ""}
         </p>
       </div>
-      <div className="container">
-        <div className="sample-grid">
-          {samples.map((sample: Sample) => {
-            const sampleFunction = sampleFunctions[sample.name];
-            if (!sampleFunction) {
-              return (
-                <div key={sample.name} className="sample-card">
-                  <div className="sample-header">
-                    <h3 className="sample-title">{sample.name}</h3>
-                    <p className="sample-file">{sample.file}</p>
-                  </div>
-                  <div className="sample-content">
-                    <div className="error-message">
-                      Sample function not found
-                    </div>
-                  </div>
+      <div className="main-content">
+        <Sidebar
+          samples={samples}
+          selectedSample={selectedSample}
+          onSampleSelect={setSelectedSample}
+        />
+        <div className="preview-pane">
+          {selectedSample && selectedSampleFunction ? (
+            <SampleCard
+              sample={selectedSample}
+              sampleFunction={selectedSampleFunction}
+            />
+          ) : selectedSample ? (
+            <div className="sample-preview">
+              <div className="sample-header">
+                <h3 className="sample-title">{selectedSample.name}</h3>
+                <p className="sample-file">{selectedSample.file}</p>
+              </div>
+              <div className="sample-content">
+                <div className="error-message">
+                  Sample function not found
                 </div>
-              );
-            }
-
-            return (
-              <SampleCard
-                key={sample.name}
-                sample={sample}
-                sampleFunction={sampleFunction}
-              />
-            );
-          })}
+              </div>
+            </div>
+          ) : (
+            <div className="no-selection">
+              <h2>Select a sample</h2>
+              <p>Choose a sample from the sidebar to preview it here.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -11,11 +11,18 @@
       background-color: #f5f5f5;
     }
     
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    
     .header {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       padding: 1rem 2rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-shrink: 0;
     }
     
     .header h1 {
@@ -24,30 +31,93 @@
       font-weight: 600;
     }
     
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .main-content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .sidebar {
+      width: 300px;
+      background: white;
+      border-right: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    
+    .sidebar-header {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+    
+    .sidebar-header h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    .sample-count {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+      display: block;
+    }
+    
+    .sample-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+    
+    .sample-item {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-bottom: 0.25rem;
+    }
+    
+    .sample-item:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .sample-item.active {
+      background-color: #dbeafe;
+      border: 1px solid #3b82f6;
+    }
+    
+    .sample-item-name {
+      font-weight: 500;
+      color: #374151;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .sample-item-file {
+      font-size: 0.75rem;
+      color: #6b7280;
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+    
+    .preview-pane {
+      flex: 1;
+      background: white;
+      overflow-y: auto;
       padding: 2rem;
     }
     
-    .sample-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    
-    .sample-card {
+    .sample-preview {
       background: white;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .sample-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     }
     
     .sample-header {
@@ -95,6 +165,17 @@
     }
     
     .no-samples h2 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .no-selection {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+    
+    .no-selection h2 {
       color: #333;
       margin-bottom: 1rem;
     }
