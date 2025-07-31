@@ -2,7 +2,7 @@ import { createServer } from 'vite';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import getPort from 'get-port';
-import { samplebookPlugin } from '../vite-plugin/index.js';
+import { samplebookPlugin } from '../vite-plugin/samplebookPlugin.js';
 import react from '@vitejs/plugin-react';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
