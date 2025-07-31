@@ -25,6 +25,7 @@
       --color-error: #e74c3c;
       --color-error-bg: #fdf2f2;
       --color-error-border: #f5c6cb;
+      --color-checker-light: rgba(0, 0, 0, 0.03);
       
       /* Typography */
       --font-mono: 'Monaco', 'Menlo', monospace;
@@ -214,16 +215,20 @@
     .preview-pane {
       flex: 1;
       background: var(--color-preview-bg);
+      background-image: 
+        linear-gradient(45deg, var(--color-checker-light) 25%, transparent 25%), 
+        linear-gradient(-45deg, var(--color-checker-light) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, var(--color-checker-light) 75%), 
+        linear-gradient(-45deg, transparent 75%, var(--color-checker-light) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
       overflow-y: auto;
-      padding: var(--spacing-2xl);
+      padding: var(--spacing-lg);
+      position: relative;
     }
     
     .sample-preview {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 400px;
-      padding: var(--spacing-2xl);
+      height: 100%;
     }
     
     .error-message {
