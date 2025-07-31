@@ -129,7 +129,9 @@ function LayoutError(props: { message: string }) {
   return (
     <div className="app">
       <div className="header">
-        <h1>Samplebook</h1>
+        <div className="header-left">
+          <div className="logo">Samplebook</div>
+        </div>
       </div>
       <div className="main-content">
         <div className="error-message">
@@ -144,7 +146,9 @@ function LayoutNoSamples() {
   return (
     <div className="app">
       <div className="header">
-        <h1>Samplebook</h1>
+        <div className="header-left">
+          <div className="logo">Samplebook</div>
+        </div>
       </div>
       <div className="main-content">
         <div className="no-samples">
@@ -202,7 +206,7 @@ export function App() {
     <div className="app">
       <div className="header">
         <div className="header-left">
-          <h1>Samplebook</h1>
+          <div className="logo">Samplebook</div>
         </div>
         <div className="header-right">
           {selectedSample && (
